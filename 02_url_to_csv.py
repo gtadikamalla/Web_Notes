@@ -1,5 +1,6 @@
 #using pandas read_html
 import pandas as pd
+from bs4 import BeautifulSoup
 url = 'https://en.wikipedia.org/wiki/List_of_S%26P_500_companies'
 import urllib.request
 with urllib.request.urlopen(url) as response:
@@ -7,6 +8,8 @@ with urllib.request.urlopen(url) as response:
 dfs = pd.read_html(page)
 print(len(dfs))
 dfs[0].to_csv('sp500-b.csv')
+print(dfs[0])
+
 soup = BeautifulSoup(page, 'html.parser')
 
 results = soup.find_all('table')
